@@ -1,0 +1,121 @@
+import React, { useState } from 'react';
+import {SafeAreaView, StatusBar, StyleSheet, Text, TextInput,TouchableOpacity, View  } from 'react-native';
+
+export default function App(){
+  
+const [altura, setAltura] = useState('')
+const [peso, setPeso] = useState('')
+function Calcular()
+{
+var imc = peso / (altura * altura) * 10000
+var total = imc.toFixed(2)
+
+if(imc < 20)
+{
+  alert('Você esta abaixo do peso!');
+} 
+else if(imc >20 && imc <= 25)
+{
+  alert("Peso Ideal");
+}
+else if(imc >25 && imc <= 30)
+{
+  alert("Sobrepeso");
+}
+else if(imc >30 && imc <= 35)
+{
+  alert("Obesidade Moderada");
+}
+else if(imc >35 && imc <= 40)
+{
+  alert("Obesidade Severa");
+}
+else if(imc >40 && imc <= 50)
+{
+  alert("Obesidade Morbida");
+}
+
+alert(`Seu imc é: ${total} \nAltura: ${altura} cm \nPeso: ${peso} kg `)
+}
+
+return(
+<SafeAreaView style={styles.container}>
+<StatusBar />
+  <Text style={styles.titulo}> Calcule seu IMC </Text>
+  { /*campo de texto altura */ }
+  <TextInput 
+  style = {styles.input}
+  placeholder="Altura(cm)"
+  keyboardType = "numeric"
+  value={altura}
+  onChangeText ={(altura)=>setAltura(altura)}
+  /> 
+  { /*campo de texto peso */ }
+    <TextInput 
+  style = {styles.input}
+  placeholder="Peso(kg)" 
+  keyboardType = "numeric"
+  value={peso}
+  onChangeText ={(peso)=>setPeso(peso)}
+  /> 
+{/* Botao */}
+<TouchableOpacity
+style = {styles.botao}
+onPress = {Calcular}
+>
+  <Text style = {styles.btntext}>Calcular</Text>
+
+</TouchableOpacity>
+ 
+</SafeAreaView>
+
+);
+
+}
+const styles = StyleSheet.create({
+container: {
+backgroundColor : 'black',
+flex: 1,
+padding: 10,
+
+
+},
+titulo:{
+  color:'red',
+  fontSize: 30,
+  textAlign: 'center',
+  fontWeight: '700',
+  backgroundColor: 'white',
+  
+},
+input:{
+  backgroundColor: 'red',
+  borderRadius: 3,
+  borderColor: 'white',
+  borderWidth: 1,
+  padding: 5,
+  marginTop: 20,
+  fontSize: 20,
+  color: 'black',
+  
+},
+botao:{
+backgroundColor: 'white',
+marginTop: 35,
+padding: 10,
+justifyContent: 'center',
+// width: 200,
+height: 60,
+color: 'black',
+alignItems: 'center',
+borderRadius: 5,
+},
+btntext: {
+ fontWeight: '700',
+ color: 'black',
+ fontSize: 20,
+}
+
+
+
+});
